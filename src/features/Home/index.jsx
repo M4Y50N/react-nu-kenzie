@@ -1,6 +1,8 @@
 import { Button } from "../../components/Button";
 import illustration from "../../assets/img/illustration.png";
 
+import { addLocalStorage } from "../../assets/scripts/localStorage";
+
 import "./styles.css";
 
 export const Home = () => {
@@ -14,7 +16,7 @@ export const Home = () => {
 						</h3>
 						<h2>Centralize o controle das suas finanças</h2>
 						<p>de forma rápida e segura</p>
-						<Button name={"Iniciar"} />
+						<Button textContent={"Iniciar"} onClkCallBack={addLocalStorage} />
 					</div>
 					<div className="body">
 						<img src={illustration} alt="illustration" />

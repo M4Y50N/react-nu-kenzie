@@ -28,7 +28,11 @@ body {
 	font-family: Inter, sans-serif;
 }
 
+ul {
+	list-style-type: none;
+}
+
 .container {
-	max-width: 43rem;
+	max-width: 50rem;
 	margin: 0 auto;
 }

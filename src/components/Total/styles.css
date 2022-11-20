@@ -1,0 +1,30 @@
+.totalHead {
+	padding: 2rem 1.3rem 1rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	row-gap: 1.5rem;
+
+	border-radius: 0.4rem;
+	box-shadow: 0 0 5px var(--gray-2);
+}
+
+.totalHead div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.value {
+	color: var(--brand-1);
+	font-weight: bold;
+}
+
+.amount {
+	margin-left: 0.3rem;
+}
+
+.totalHead p {
+	font-size: var(--font-5);
+}

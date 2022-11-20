@@ -1,9 +1,9 @@
 import "./styles.css";
 
-export const Button = ({ name }) => {
+export const Button = ({ textContent, onClkCallBack }) => {
 	return (
 		<>
-			<button>{name}</button>
+			<button onClick={onClkCallBack}>{textContent}</button>
 		</>
 	);
 };
