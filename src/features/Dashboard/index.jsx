@@ -29,29 +29,24 @@ export const Dashboard = () => {
 
 		setItems(() => [...items, formData]);
 
-		const inputs = document.querySelectorAll("input");
-		inputs[0].focus();
-
-		inputs.forEach((e) => {
-			e.value = "";
+		setFormData({
+			desc: "",
+			value: "",
+			typeEntry: options[0].value,
 		});
+
+		document.querySelector("select").value = "entrada";
 	}
 
 	function submit(e) {
 		e.preventDefault();
 		addResume();
-		setFormData({
-			desc: "",
-			value: "",
-			typeEntry: "entrada",
-		});
 	}
 
 	function delResume(index) {
 		const idTarg = index;
 
 		const newList = items.filter((e, i) => {
-			// console.log(e.id, idTarg);
 			return i !== idTarg;
 		});
 
@@ -111,7 +106,6 @@ export const Dashboard = () => {
 								onChangeCallBack={(e) =>
 									setFormData({
 										...formData,
-										id: items.length,
 										desc: e.target.value,
 									})
 								}
@@ -142,7 +136,7 @@ export const Dashboard = () => {
 									name="typeEntry"
 									id="typeEntry"
 									options={options}
-									defaultValue={options[0].value}
+									defaultValue={formData.typeEntry}
 									onChangeCallBack={(e) =>
 										setFormData({ ...formData, typeEntry: e.target.value })
 									}
