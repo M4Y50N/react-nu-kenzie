@@ -1,0 +1,56 @@
+.home {
+	color: var(--gray-1);
+	background-color: var(--gray-4);
+}
+
+.home main {
+	height: 100vh;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	flex-wrap: wrap;
+}
+
+.head {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.3rem;
+}
+
+.head h3 span {
+	color: var(--brand-1);
+}
+
+.head p {
+	color: var(--gray-2);
+	font-size: var(--font-5);
+}
+
+.head button {
+	width: 160px;
+	color: var(--gray-1);
+	background-color: var(--brand-1);
+}
+
+.head button:hover {
+	background-color: var(--brand-2);
+}
+
+.body {
+	width: 100%;
+	max-width: 450px;
+}
+
+.body img {
+	width: 100%;
+}
+
+@media (max-width: 520px) {
+	.home main {
+		padding: 2.3rem 1rem !important;
+		justify-content: center;
+	}
+}
