@@ -1,10 +1,11 @@
 import "./styles.css";
 
-export const Input = ({ placeholder, onChangeCallBack }) => {
+export const Input = ({ placeholder, value, onChangeCallBack }) => {
 	return (
 		<>
 			<input
 				type="text"
+				value={value}
 				onChange={onChangeCallBack}
 				placeholder={placeholder}
 			/>
