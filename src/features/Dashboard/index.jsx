@@ -2,7 +2,7 @@ import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Total } from "../../components/Total";
 import { Input, Label } from "../../components/Input";
-import { Select, Option } from "../../components/Select";
+import { Select } from "../../components/Select";
 
 import trash from "../../assets/img/trash.svg";
 
@@ -10,27 +10,111 @@ import "./styles.css";
 
 import { useState } from "react";
 
-const data = [];
-
 export const Dashboard = () => {
 	const [total, setTotal] = useState(0),
-		[desc, setDesc] = useState("");
+		[formData, setFormData] = useState({
+			desc: "",
+			value: "",
+			typeEntry: "entrada",
+		});
+
+	const [filter, setFilter] = useState("todos");
+
+	const [items, setItems] = useState([]);
 
 	function addResume() {
-		setTotal(total + 1);
-		data.push("sua mae");
+		formData.typeEntry === "despesa"
+			? setTotal(total - formData.value)
+			: setTotal(total + formData.value);
+
+		setItems(() => [...items, formData]);
+
+		const inputs = document.querySelectorAll("input");
+		inputs[0].focus();
+
+		inputs.forEach((e) => {
+			e.value = "";
+		});
 	}
+
+	function submit(e) {
+		e.preventDefault();
+		addResume();
+		setFormData({
+			desc: "",
+			value: "",
+			typeEntry: "entrada",
+		});
+	}
+
+	function delResume(index) {
+		const idTarg = index;
+
+		const newList = items.filter((e, i) => {
+			// console.log(e.id, idTarg);
+			return i !== idTarg;
+		});
+
+		setTotal(
+			items[index].typeEntry === "entrada"
+				? total - items[index].value
+				: total + items[index].value
+		);
+		setItems(newList);
+	}
+	const filteredList = items.filter((item) => {
+		return filter === "todos" ? true : item.typeEntry === filter;
+	});
+
+	function render() {
+		return filteredList.map((elm, i) => {
+			return (
+				<li
+					key={i}
+					className={elm.typeEntry === "despesa" ? "item saida" : "item"}
+				>
+					<h4>{elm.desc}</h4>
+					<div className="control">
+						<div className="controlValue">
+							R$
+							<span className="controlAmount"> {elm.value}</span>
+						</div>
+
+						<Button
+							onClkCallBack={() => {
+								delResume(i);
+							}}
+							textContent={<img src={trash} alt="trash" />}
+						/>
+					</div>
+					<div className="typeEntry">{elm.typeEntry}</div>
+				</li>
+			);
+		});
+	}
+
+	const options = [
+		{ value: "entrada", label: "Entrada" },
+		{ value: "despesa", label: "Despesa" },
+	];
 
 	return (
 		<>
 			<Header />
 			<main className="container">
 				<div className="resumeHead">
-					<div className="addResumo">
+					<form onSubmit={submit} className="addResumo">
 						<div className="description">
 							<Label For="desc" textContent={"Descrição"} />
 							<Input
-								onChangeCallBack={(e) => setDesc(e.target.value)}
+								value={formData.desc}
+								onChangeCallBack={(e) =>
+									setFormData({
+										...formData,
+										id: items.length,
+										desc: e.target.value,
+									})
+								}
 								placeholder={"Digite aqui sua descrição"}
 							/>
 							<span>Ex: Compra de roupas</span>
@@ -39,50 +123,79 @@ export const Dashboard = () => {
 							<div>
 								<Label For="value" textContent={"Valor"} />
 								<div className="inputValue">
-									<Input placeholder={1} />
+									<Input
+										value={formData.value}
+										onChangeCallBack={(e) =>
+											setFormData({
+												...formData,
+												value: Number(e.target.value),
+											})
+										}
+										placeholder={1}
+									/>
 									<span>R$</span>
 								</div>
 							</div>
 							<div className="divSelect">
 								<Label For={"typeValue"} textContent={"Tipo de Valor"} />
-								<Select name="typeEntry" id="typeEntry">
-									<Option value={"entrada"} textContent={"Entrada"} />
-									<Option value={"saida"} textContent={"Saída"} />
-									<Option value={"todos"} textContent={"Todos"} />
-								</Select>
+								<Select
+									name="typeEntry"
+									id="typeEntry"
+									options={options}
+									defaultValue={options[0].value}
+									onChangeCallBack={(e) =>
+										setFormData({ ...formData, typeEntry: e.target.value })
+									}
+								/>
 							</div>
 						</div>
-						<Button onClkCallBack={addResume} textContent={"Inserir Valor"} />
-					</div>
-					{data.length ? <Total total={total} /> : false}
+						{
+							<Button
+								type={"submit"}
+								textContent={"Inserir Valor"}
+								className={
+									formData.desc === "" || formData.value === "" ? "disable" : ""
+								}
+							/>
+						}
+					</form>
+					{items.length ? <Total total={total} /> : false}
 				</div>
 				<div className="resumeBody">
 					<div className="filterOptions">
 						<h4>Resumo financeiro</h4>
 						<div className="options">
-							<Button textContent={"Todos"} />
-							<Button textContent={"Entrada"} />
-							<Button textContent={"Despensas"} />
+							<Button
+								textContent={"Todos"}
+								onClkCallBack={() => {
+									setFilter("todos");
+								}}
+							/>
+							<Button
+								textContent={"Entrada"}
+								onClkCallBack={() => {
+									setFilter("entrada");
+								}}
+							/>
+							<Button
+								textContent={"Despesa"}
+								onClkCallBack={() => {
+									setFilter("despesa");
+								}}
+							/>
 						</div>
 					</div>
 					<ul className="resumeList">
-						<h3> Você ainda não possui nenhum lançamento</h3>
-						<li className="itemEmp"></li>
-						<li className="itemEmp"></li>
-						<li className="itemEmp"></li>
-
-						<li className="item">
-							<h4>Descrição Resumo</h4>
-							<div className="control">
-								<div className="controlValue">
-									R$
-									<span className="controlAmount"> 5000</span>
-								</div>
-
-								<Button textContent={<img src={trash} alt="trash" />} />
-							</div>
-							<div className="typeEntry">Entrada</div>
-						</li>
+						{!items.length ? (
+							<>
+								<h3> Você ainda não possui nenhum lançamento</h3>
+								<li className="itemEmp"></li>
+								<li className="itemEmp"></li>
+								<li className="itemEmp"></li>
+							</>
+						) : (
+							render()
+						)}
 					</ul>
 				</div>
 			</main>

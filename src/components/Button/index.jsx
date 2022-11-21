@@ -1,9 +1,11 @@
 import "./styles.css";
 
-export const Button = ({ textContent, onClkCallBack }) => {
+export const Button = ({ id, className, type, textContent, onClkCallBack }) => {
 	return (
 		<>
-			<button onClick={onClkCallBack}>{textContent}</button>
+			<button id={id} className={className} type={type} onClick={onClkCallBack}>
+				{textContent}
+			</button>
 		</>
 	);
 };

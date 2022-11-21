@@ -1,13 +1,26 @@
 import "./styles.css";
 
-export const Select = ({ name, id, children }) => {
+export const Select = ({
+	name,
+	id,
+	options,
+	onChangeCallBack,
+	defaultValue,
+}) => {
 	return (
-		<select name="" id="">
-			{children}
+		<select
+			name={name}
+			id={id}
+			defaultValue={defaultValue}
+			onChange={onChangeCallBack}
+		>
+			{options.map((option, i) => {
+				return (
+					<option key={i} value={option.value}>
+						{option.label}
+					</option>
+				);
+			})}
 		</select>
 	);
-};
-
-export const Option = ({ value, textContent }) => {
-	return <option value={value}>{textContent}</option>;
 };

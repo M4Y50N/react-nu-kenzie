@@ -10,17 +10,19 @@ export const Home = () => {
 		<>
 			<div className="home">
 				<div className="container">
-					<div className="head">
-						<h3>
-							<span>Nu</span> Kenzie
-						</h3>
-						<h2>Centralize o controle das suas finanças</h2>
-						<p>de forma rápida e segura</p>
-						<Button textContent={"Iniciar"} onClkCallBack={addLocalStorage} />
-					</div>
-					<div className="body">
-						<img src={illustration} alt="illustration" />
-					</div>
+					<main>
+						<div className="head">
+							<h3>
+								<span>Nu</span> Kenzie
+							</h3>
+							<h2>Centralize o controle das suas finanças</h2>
+							<p>de forma rápida e segura</p>
+							<Button textContent={"Iniciar"} onClkCallBack={addLocalStorage} />
+						</div>
+						<div className="body">
+							<img src={illustration} alt="illustration" />
+						</div>
+					</main>
 				</div>
 			</div>
 		</>

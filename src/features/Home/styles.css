@@ -3,12 +3,14 @@
 	background-color: var(--gray-4);
 }
 
-.home .container {
-	min-height: 100vh;
+.home main {
+	height: 100vh;
 
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	flex-wrap: wrap;
 }
 
 .head {
@@ -44,4 +46,11 @@
 
 .body img {
 	width: 100%;
+}
+
+@media (max-width: 520px) {
+	.home main {
+		padding: 2.3rem 1rem !important;
+		justify-content: center;
+	}
 }
