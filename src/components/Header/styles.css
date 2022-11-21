@@ -1,0 +1,19 @@
+header {
+	box-shadow: 0 4px 5px var(--gray-2);
+}
+
+header nav {
+	padding: 1.5rem 1rem;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo span {
+	color: var(--brand-1);
+}
+
+header button:hover {
+	color: var(--gray-1);
+	background-color: var(--brand-1);
+}
