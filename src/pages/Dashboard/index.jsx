@@ -13,11 +13,16 @@ import { useState } from "react";
 export const Dashboard = () => {
 	const [items, setItems] = useState([]);
 
+	const options = [
+		{ value: "entrada", label: "Entrada" },
+		{ value: "despesa", label: "Despesa" },
+	];
+
 	const [total, setTotal] = useState(0),
 		[formData, setFormData] = useState({
 			desc: "",
 			value: "",
-			typeEntry: "entrada",
+			typeEntry: options[0].value,
 		});
 
 	const [filter, setFilter] = useState("todos");
@@ -85,11 +90,6 @@ export const Dashboard = () => {
 			);
 		});
 	}
-
-	const options = [
-		{ value: "entrada", label: "Entrada" },
-		{ value: "despesa", label: "Despesa" },
-	];
 
 	return (
 		<>
