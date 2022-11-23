@@ -11,7 +11,6 @@ export const Select = ({
 		<select
 			name={name}
 			id={id}
-			value={defaultValue}
 			defaultValue={defaultValue}
 			onChange={onChangeCallBack}
 		>
