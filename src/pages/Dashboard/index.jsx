@@ -134,7 +134,7 @@ export const Dashboard = () => {
 									name="typeEntry"
 									id="typeEntry"
 									options={options}
-									defaultValue={formData.typeEntry}
+									value={formData.typeEntry}
 									onChangeCallBack={(e) =>
 										setFormData({ ...formData, typeEntry: e.target.value })
 									}

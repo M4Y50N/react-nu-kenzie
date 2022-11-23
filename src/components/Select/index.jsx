@@ -1,20 +1,8 @@
 import "./styles.css";
 
-export const Select = ({
-	name,
-	id,
-	options,
-	onChangeCallBack,
-	defaultValue,
-}) => {
+export const Select = ({ name, id, options, onChangeCallBack, value }) => {
 	return (
-		<select
-			name={name}
-			id={id}
-			value={defaultValue}
-			defaultValue={defaultValue}
-			onChange={onChangeCallBack}
-		>
+		<select name={name} id={id} value={value} onChange={onChangeCallBack}>
 			{options.map((option, i) => {
 				return (
 					<option key={i} value={option.value}>
