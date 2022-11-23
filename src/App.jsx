@@ -1,6 +1,6 @@
 import "./App.css";
-import { Home } from "./features/Home";
-import { Dashboard } from "./features/Dashboard";
+import { Home } from "./pages/Home";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
 	return (

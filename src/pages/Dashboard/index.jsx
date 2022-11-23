@@ -11,6 +11,8 @@ import "./styles.css";
 import { useState } from "react";
 
 export const Dashboard = () => {
+	const [items, setItems] = useState([]);
+
 	const [total, setTotal] = useState(0),
 		[formData, setFormData] = useState({
 			desc: "",
@@ -19,8 +21,6 @@ export const Dashboard = () => {
 		});
 
 	const [filter, setFilter] = useState("todos");
-
-	const [items, setItems] = useState([]);
 
 	function addResume() {
 		formData.typeEntry === "despesa"
@@ -44,10 +44,10 @@ export const Dashboard = () => {
 	}
 
 	function delResume(index) {
-		const idTarg = index;
+		const idTarget = index;
 
-		const newList = items.filter((e, i) => {
-			return i !== idTarg;
+		const exclusiveList = items.filter((e, i) => {
+			return i !== idTarget;
 		});
 
 		setTotal(
@@ -55,7 +55,7 @@ export const Dashboard = () => {
 				? total - items[index].value
 				: total + items[index].value
 		);
-		setItems(newList);
+		setItems(exclusiveList);
 	}
 	const filteredList = items.filter((item) => {
 		return filter === "todos" ? true : item.typeEntry === filter;
