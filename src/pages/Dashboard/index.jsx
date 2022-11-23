@@ -34,8 +34,6 @@ export const Dashboard = () => {
 			value: "",
 			typeEntry: options[0].value,
 		});
-
-		document.querySelector("select").value = "entrada";
 	}
 
 	function submit(e) {
